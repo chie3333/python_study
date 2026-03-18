@@ -27,7 +27,7 @@ def game(v1, v2):
         game_count += 1
         
         if player_int > random_int:
-            if game_count >= 5:
+            if game_count > 5:
                 if player_int - random_int >= 5 :
                     print("다운(5 이상 차이납니다)")
                 elif player_int - random_int < 5 :
@@ -36,7 +36,7 @@ def game(v1, v2):
                 print("다운")
             
         elif player_int < random_int:
-            if game_count >= 5:
+            if game_count > 5:
                 if random_int - player_int >= 5 :
                     print("업(5 이상 차이납니다)")
                 elif random_int - player_int < 5 :
