@@ -91,3 +91,35 @@ while True:
             print("비겼습니다") 
             game_round +=1                  
             print("round %d" %game_round)  
+
+
+'''
+챗지피티 힌트 얻은 것
+
+1. 예외처리 구문 continue 해야 다시 입력으로 돌아감
+2. 특정 범위 숫자 입력 유도시 조건문 쓰기
+3. game_count 중복 제거 (처음에는 이프절 각각 game_count 넣음), 비겼을 때 다시 게임 시작시 count 0으로 갱신 필요
+4. 반복문 안에 함수 넣기
+
+-이전 버전
+game()
+while True:
+  
+    if game_count1 < game_count2:
+            print("%s 승" %player1)
+            break
+    elif game_count1 > game_count2:
+            print("%s 승" %player2)   
+            break
+    elif game_count1 == game_count2:
+            print("비겼습니다") 
+            
+            game_round +=1  
+            game()                
+            print("round %d" %game_round)  
+
+
+
+
+
+'''
