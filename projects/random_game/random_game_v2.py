@@ -88,17 +88,18 @@ while True:
 con = sqlite3.connect("random_game_score.db")
 cur = con.cursor()
 
-cur.execute("create table if not exists scoreTable (play_date char(10), playerName char(15), score int)")
+cur.execute("create table if not exists recordTable (play_date char(10), player_name char(15), try_count number, round char)")
 
 today = datetime.today().strftime("%Y-%m-%d")
 
-cur.execute("insert into scoreTable values(?, ?, ?)", (today, player1.player, player1.game_count))
-cur.execute("insert into scoreTable values(?, ?, ?)", (today, player2.player, player2.game_count))
+cur.execute("insert into recordTable values(?, ?, ?, ?)", (today, player1.player, player1.game_count, game_round))
+cur.execute("insert into recordTable values(?, ?, ?, ?)", (today, player2.player, player2.game_count, game_round))
 con.commit()
 
-cur.execute("select * from scoreTable")
+cur.execute("select * from recordTable")
 
-print("    날짜      플레이어 이름     점수")
+
+print("    날짜    플레이어 이름    시도횟수")
 print("===================================")
 
 while True:
