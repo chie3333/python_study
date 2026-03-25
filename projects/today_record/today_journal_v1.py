@@ -37,8 +37,7 @@ class DBmanager :
         self.cur.execute("insert into today_diary values(?,?,?)", (date, title, content))
         self.con.commit()
 
-    def read_diary(self):
-        self.cur.execute("select * from today_diary")
+    def read_diary(self) :
         self.row = self.cur.fetchone()
         
         if self.row == None :
@@ -55,7 +54,8 @@ class DBmanager :
                 print("%s" % self.data1)
                 print("%s" % self.data2)
                 print("%s" % self.data3)
-                self.row = self.cur.fetchone()
+                self.row = self.cur.fetchone()    
+    
 
     def search_diary(self) :
         
@@ -71,68 +71,33 @@ class DBmanager :
 
                 self.date_key = input("날짜를 입력하세요(형식 2026-03-24) : ") 
                 self.cur.execute("select * from today_diary where date like ?", ('%'+ self.date_key + '%',))  ### 지피티 도움 execute는 (쿼리문, 값들(튜플)) => 값: (v1 , ) < 콤마로 표시해야 그냥 변수가 아닌 튜플로 인식
-                self.row = self.cur.fetchone()
-        
-                if self.row == None :
-                    print("저장된 기록이 없습니다")
-                else :
-                    while True :
-                    
-                        if self.row == None :
-                            break
-                        
-                        self.data1 = self.row[0]
-                        self.data2 = self.row[1]
-                        self.data3 = self.row[2]
-                        print("%s" % self.data1)
-                        print("%s" % self.data2)
-                        print("%s" % self.data3)
-                        self.row = self.cur.fetchone()
+                
+                self.read_diary()
+
             elif self.choice2 == "2" :
 
                 self.title_key = input("제목에서 검색할 내용을 입력하세요 : ")
                 self.cur.execute("select * from today_diary where title like ?", ('%'+ self.title_key + '%',))
-                self.row = self.cur.fetchone()
-        
-                if self.row == None :
-                    print("저장된 기록이 없습니다")
-                else :
-                    while True :
-                    
-                        if self.row == None :
-                            break
-                        
-                        self.data1 = self.row[0]
-                        self.data2 = self.row[1]
-                        self.data3 = self.row[2]
-                        print("%s" % self.data1)
-                        print("%s" % self.data2)
-                        print("%s" % self.data3)
-                        self.row = self.cur.fetchone()
+                
+                self.read_diary()
+
             elif self.choice2 == "3" :
 
                 self.content_key = input("일기 내용에서 검색할 내용을 입력하세요 :")
                 self.cur.execute("select * from today_diary where content like ?", ('%'+ self.content_key + '%',))    
-                self.row = self.cur.fetchone()
-        
-                if self.row == None :
-                    print("저장된 기록이 없습니다")
-                else :
-                    while True :
-                    
-                        if self.row == None :
-                            break
-                        
-                        self.data1 = self.row[0]
-                        self.data2 = self.row[1]
-                        self.data3 = self.row[2]
-                        print("%s" % self.data1)
-                        print("%s" % self.data2)
-                        print("%s" % self.data3)
-                        self.row = self.cur.fetchone()
+                
+                self.read_diary()
 
             elif self.choice2 == "4" :
                 return                     # 호출했던 위치로 돌아감
+            
+
+    def read_all_diary(self):
+        
+        self.cur.execute("select * from today_diary")
+        
+        self.read_diary()
+            
 class Menu :
     def __init__(self):
         print("DIARY")
@@ -165,7 +130,7 @@ class Menu :
                     db.search_diary()
 
                 elif self.choice_1 == "2" :
-                    db.read_diary()
+                    db.read_all_diary()
                 
                 elif self.choice_1 == "3" :
                     continue
